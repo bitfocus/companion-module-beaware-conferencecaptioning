@@ -21,7 +21,7 @@ export function UpdateActions(self: ModuleInstance): void {
 				const response = await fetch(
 					`https://api.deafassistant.com/stream/LiteGetStream?streamName=${self.config.streamName}`,
 					{
-						method: 'POST',
+						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
 						},

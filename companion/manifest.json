@@ -20,7 +20,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "ConferenceCaptioning",
-	"products": ["API"],
-	"keywords": []
+	"manufacturer": "BeAware",
+	"products": ["ConferenceCaptioning"],
+	"keywords": ["captioning", "transcription", "translation", "AI", "offline"]
 }
