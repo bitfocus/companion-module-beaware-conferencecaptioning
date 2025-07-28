@@ -3,7 +3,7 @@
 	"name": "beaware-conferencecaptioning",
 	"shortname": "ConferenceCaptioning",
 	"description": "Control ConferenceCaptioning's on-device transcription and translation AI service",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-beaware-conferencecaptioning.git",
 	"bugs": "https://github.com/bitfocus/companion-module-beaware-conferencecaptioning/issues",
