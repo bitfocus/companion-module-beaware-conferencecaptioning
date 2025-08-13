@@ -1,13 +1,13 @@
 import type { DropdownChoice } from '@companion-module/base'
 
-export interface DropdownChoiceWithButtonText extends DropdownChoice {
-	buttonText: string
+export interface DropdownChoiceWithActionId extends DropdownChoice {
+	actionId: string
 }
-export const CONFCAPCOMMANDS: DropdownChoiceWithButtonText[] = [
-	{ id: 'testRemoteConnection', label: 'Test Remote Connection', buttonText: 'Test Remote Connection' },
-	{ id: 'testLocalConnection', label: 'Test Local Connection', buttonText: 'Test Local Connection' },
-	{ id: 'startTranscribing', label: 'Start transcribing', buttonText: 'Start transcribing' },
-	{ id: 'stopTranscribing', label: 'Stop transcribing', buttonText: 'Stop transcribing' },
-	{ id: 'showCaptions', label: 'Show captions', buttonText: 'Show captions' },
-	{ id: 'hideCaptions', label: 'Hide captions', buttonText: 'Hide captions' },
+export const CONFCAPCOMMANDS: DropdownChoiceWithActionId[] = [
+	{ id: 'testRemoteConnection', label: 'Test Remote Connection', actionId: 'get_remote' },
+	{ id: 'testLocalConnection', label: 'Test Local Connection', actionId: 'get_localhost' },
+	{ id: 'startTranscribing', label: 'Start transcribing', actionId: 'start_transcribing' },
+	{ id: 'stopTranscribing', label: 'Stop transcribing', actionId: 'stop_transcribing' },
+	{ id: 'showCaptions', label: 'Show captions', actionId: 'show_captions' },
+	{ id: 'hideCaptions', label: 'Hide captions', actionId: 'hide_captions' },
 ] as const

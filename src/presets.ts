@@ -10,20 +10,20 @@ export function UpdatePresets(self: ModuleInstance): void {
 		const preset: CompanionPresetDefinition = {
 			type: 'button',
 			category: 'ConferenceCaptioning',
-			name: command.buttonText,
+			name: command.label,
 			style: {
 				size: 14,
 				bgcolor: combineRgb(0, 0, 0),
 				color: combineRgb(255, 255, 255),
-				text: command.buttonText,
+				text: command.label,
 			},
 			steps: [
 				{
 					down: [
 						{
-							actionId: 'get_caption',
+							actionId: command.actionId,
 							options: {
-								command: command.id,
+								[command.id]: command.id,
 							},
 						},
 					],

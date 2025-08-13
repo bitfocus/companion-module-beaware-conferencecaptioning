@@ -36,7 +36,7 @@ async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
 
 export function UpdateActions(self: ModuleInstance): void {
 	self.setActionDefinitions({
-		get_caption: {
+		get_remote: {
 			name: 'Test Stream Connection',
 			options: [
 				{
