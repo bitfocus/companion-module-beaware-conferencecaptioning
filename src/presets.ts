@@ -22,9 +22,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 					down: [
 						{
 							actionId: command.actionId,
-							options: {
-								[command.id]: command.id,
-							},
+							options: {},
 						},
 					],
 					up: [],

@@ -1,6 +1,5 @@
 import type { ModuleInstance } from './main.js'
 import { InstanceStatus } from '@companion-module/base'
-import { CONFCAPCOMMANDS } from './constants.js'
 
 async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
 	if (!url.includes('http://')) {
@@ -38,15 +37,7 @@ export function UpdateActions(self: ModuleInstance): void {
 	self.setActionDefinitions({
 		get_remote: {
 			name: 'Test Stream Connection',
-			options: [
-				{
-					id: 'testRemoteConnection',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'testRemoteConnection',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = `https://api.deafassistant.com/stream/LiteGetStream?streamName=${self.config.streamName}`
 				await sendCommand(self, url)
@@ -54,15 +45,7 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		get_localhost: {
 			name: 'Test Localhost Connection',
-			options: [
-				{
-					id: 'testLocalConnection',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'testLocalConnection',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = self.config.localhostUrl.replace('index.html', 'stream/LiteGetStream')
 				await sendCommand(self, url)
@@ -70,15 +53,7 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		start_transcribing: {
 			name: 'Start transcribing',
-			options: [
-				{
-					id: 'startTranscribing',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'startTranscribing',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = self.config.localhostUrl.replace('index.html', 'start')
 				await sendCommand(self, url)
@@ -86,15 +61,7 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		stop_transcribing: {
 			name: 'Stop transcribing',
-			options: [
-				{
-					id: 'stopTranscribing',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'stopTranscribing',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = self.config.localhostUrl.replace('index.html', 'stop')
 				await sendCommand(self, url)
@@ -102,15 +69,7 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		show_captions: {
 			name: 'Show Captions',
-			options: [
-				{
-					id: 'showCaptions',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'showCaptions',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = self.config.localhostUrl.replace('index.html', 'show')
 				await sendCommand(self, url)
@@ -118,15 +77,7 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		hide_captions: {
 			name: 'Hide Captions',
-			options: [
-				{
-					id: 'hideCaptions',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'hideCaptions',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = self.config.localhostUrl.replace('index.html', 'hide')
 				await sendCommand(self, url)
