@@ -17,7 +17,7 @@ async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
 		!url.endsWith('hide')
 	) {
 		throw new Error(
-			"To use this functionality, the Localhost URL must be in this format http://10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
+			"To use this functionality, the Localhost URL must be in this format 10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
 		)
 	}
 
@@ -47,7 +47,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Test Localhost Connection',
 			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'stream/LiteGetStream')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'stream/LiteGetStream')
 				await sendCommand(self, url)
 			},
 		},
@@ -55,7 +55,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Start transcribing',
 			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'start')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'start')
 				await sendCommand(self, url)
 			},
 		},
@@ -63,7 +63,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Stop transcribing',
 			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'stop')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'stop')
 				await sendCommand(self, url)
 			},
 		},
@@ -71,7 +71,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Show Captions',
 			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'show')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'show')
 				await sendCommand(self, url)
 			},
 		},
@@ -79,7 +79,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Hide Captions',
 			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'hide')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'hide')
 				await sendCommand(self, url)
 			},
 		},
