@@ -1,26 +1,28 @@
 import type { ModuleInstance } from './main.js'
 import { InstanceStatus } from '@companion-module/base'
 
-async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
-	if (!url.includes('http://')) {
-		throw new Error(
-			"To use this functionality, the Localhost URL must start with http://. Here's a video on how to get it: https://vimeo.com/1064921264",
-		)
-	}
-
+function urlChecker(url: string): boolean {
 	if (
-		!url.includes('index.html') &&
-		!url.includes('LiteGetStream') &&
-		!url.endsWith('start') &&
-		!url.endsWith('stop') &&
-		!url.endsWith('show') &&
-		!url.endsWith('hide')
+		url.includes('index.html') ||
+		url.endsWith('start') ||
+		url.endsWith('stop') ||
+		url.endsWith('show') ||
+		url.endsWith('hide')
 	) {
+		if (!url.includes(':8080')) {
+			throw new Error(
+				"To use this functionality, the Localhost URL must be in this format 10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
+			)
+		}
+	} else if (url === 'api.deafassistant.com/stream/LiteGetStream?streamName=') {
 		throw new Error(
-			"To use this functionality, the Localhost URL must be in this format 10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
+			"To use this functionality, the stream name cannot be empty Here's a video on how to get it: https://vimeo.com/1064921264",
 		)
 	}
-
+	return true
+}
+async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
+	urlChecker(url)
 	const response = await fetch(url, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
