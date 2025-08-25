@@ -25,7 +25,7 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 		{
 			type: 'textinput',
 			id: 'localhostUrl',
-			label: 'Localhost URL in this format http://10.0.0.199:8080/index.html (optional)',
+			label: 'Localhost URL in this format 10.0.0.199:8080/index.html (optional)',
 			width: 12,
 		},
 	]

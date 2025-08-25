@@ -1,9 +1,4 @@
-import type { DropdownChoice } from '@companion-module/base'
-
-export interface DropdownChoiceWithActionId extends DropdownChoice {
-	actionId: string
-}
-export const CONFCAPCOMMANDS: DropdownChoiceWithActionId[] = [
+export const CONFCAPCOMMANDS = [
 	{ id: 'testRemoteConnection', label: 'Test Remote Connection', actionId: 'get_remote' },
 	{ id: 'testLocalConnection', label: 'Test Local Connection', actionId: 'get_localhost' },
 	{ id: 'startTranscribing', label: 'Start transcribing', actionId: 'start_transcribing' },

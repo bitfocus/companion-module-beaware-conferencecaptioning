@@ -1,27 +1,28 @@
 import type { ModuleInstance } from './main.js'
 import { InstanceStatus } from '@companion-module/base'
-import { CONFCAPCOMMANDS } from './constants.js'
 
-async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
-	if (!url.includes('http://')) {
-		throw new Error(
-			"To use this functionality, the Localhost URL must start with http://. Here's a video on how to get it: https://vimeo.com/1064921264",
-		)
-	}
-
+function urlChecker(url: string): boolean {
 	if (
-		!url.includes('index.html') &&
-		!url.includes('LiteGetStream') &&
-		!url.endsWith('start') &&
-		!url.endsWith('stop') &&
-		!url.endsWith('show') &&
-		!url.endsWith('hide')
+		url.includes('index.html') ||
+		url.endsWith('start') ||
+		url.endsWith('stop') ||
+		url.endsWith('show') ||
+		url.endsWith('hide')
 	) {
+		if (!url.includes(':8080')) {
+			throw new Error(
+				"To use this functionality, the Localhost URL must be in this format 10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
+			)
+		}
+	} else if (url === 'api.deafassistant.com/stream/LiteGetStream?streamName=') {
 		throw new Error(
-			"To use this functionality, the Localhost URL must be in this format http://10.0.0.199:8080/index.html. Here's a video on how to get it: https://vimeo.com/1064921264",
+			"To use this functionality, the stream name cannot be empty Here's a video on how to get it: https://vimeo.com/1064921264",
 		)
 	}
-
+	return true
+}
+async function sendCommand(self: ModuleInstance, url: string): Promise<void> {
+	urlChecker(url)
 	const response = await fetch(url, {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
@@ -38,15 +39,7 @@ export function UpdateActions(self: ModuleInstance): void {
 	self.setActionDefinitions({
 		get_remote: {
 			name: 'Test Stream Connection',
-			options: [
-				{
-					id: 'testRemoteConnection',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'testRemoteConnection',
-				},
-			],
+			options: [],
 			callback: async () => {
 				const url = `https://api.deafassistant.com/stream/LiteGetStream?streamName=${self.config.streamName}`
 				await sendCommand(self, url)
@@ -54,81 +47,41 @@ export function UpdateActions(self: ModuleInstance): void {
 		},
 		get_localhost: {
 			name: 'Test Localhost Connection',
-			options: [
-				{
-					id: 'testLocalConnection',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'testLocalConnection',
-				},
-			],
+			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'stream/LiteGetStream')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'stream/LiteGetStream')
 				await sendCommand(self, url)
 			},
 		},
 		start_transcribing: {
 			name: 'Start transcribing',
-			options: [
-				{
-					id: 'startTranscribing',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'startTranscribing',
-				},
-			],
+			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'start')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'start')
 				await sendCommand(self, url)
 			},
 		},
 		stop_transcribing: {
 			name: 'Stop transcribing',
-			options: [
-				{
-					id: 'stopTranscribing',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'stopTranscribing',
-				},
-			],
+			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'stop')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'stop')
 				await sendCommand(self, url)
 			},
 		},
 		show_captions: {
 			name: 'Show Captions',
-			options: [
-				{
-					id: 'showCaptions',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'showCaptions',
-				},
-			],
+			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'show')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'show')
 				await sendCommand(self, url)
 			},
 		},
 		hide_captions: {
 			name: 'Hide Captions',
-			options: [
-				{
-					id: 'hideCaptions',
-					type: 'dropdown',
-					label: 'Action type',
-					choices: CONFCAPCOMMANDS,
-					default: 'hideCaptions',
-				},
-			],
+			options: [],
 			callback: async () => {
-				const url = self.config.localhostUrl.replace('index.html', 'hide')
+				const url = 'http://' + self.config.localhostUrl.replace('index.html', 'hide')
 				await sendCommand(self, url)
 			},
 		},
